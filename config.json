@@ -5,7 +5,7 @@
   },
   "html": {
     "dev": "html",
-    "dist": "../",
+    "dist": "./",
     "parts": "templates",
     "run": true
   }
