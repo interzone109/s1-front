@@ -15,15 +15,15 @@ newLi.appendChild(addLink);
 var  topBarUl = document.getElementById("topBarContentUl");
 topBarUl.prepend(newLi);
 
-    var request = new XMLHttpRequest();
+    var requestGET = new XMLHttpRequest();
     
-    request.open('GET', 'http://localhost:8080/partners', true);
-    request.onload = function () {
+    requestGET.open('GET', 'http://localhost:8080/partners', true);
+    requestGET.onload = function () {
     
       // Begin accessing JSON data here
       var data = JSON.parse(this.response);
     
-      if (request.status >= 200 && request.status < 400) {
+      if (requestGET.status >= 200 && requestGET.status < 400) {
        //елемент выравнивая карточек с данными
         var partnerRow = document.createElement('div');
         partnerRow.className="row";
@@ -63,6 +63,41 @@ topBarUl.prepend(newLi);
       }
     }
     
-    request.send();
+    requestGET.send();
     
+    
+    var comfirePartner = document.getElementById("comfirePartnerButton").addEventListener("focus", addNewPartner);
+    
+    function addNewPartner(){
 
+  var companyName = document.getElementById("inputCompanyName");
+  var companyPhon = document.getElementById("inputCompanyPhon");
+  var companyMail = document.getElementById("inputCompanyMail");
+
+
+
+var requestPOST = new XMLHttpRequest();
+
+requestPOST.open("POST", 'http://localhost:8080/partners', true);
+requestPOST.setRequestHeader("Content-Type", "application/json");
+requestPOST.onreadystatechange = function () {
+    if (requestPOST.readyState === 4 && requestPOST.status === 200) {
+        var json = JSON.parse(requestPOST.responseText);
+        console.log("send");
+    }else {
+      console.log('error');
+    }
+};
+
+var data = JSON.stringify([{
+  "company": companyName.value,
+  "phonNumber": companyPhon.value,
+  "partnerMail": companyMail.value
+}]);
+requestPOST.send(data);
+
+
+companyName.value="";
+companyPhon.value="";
+companyMail.value="";
+};
