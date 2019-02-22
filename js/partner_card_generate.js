@@ -1,5 +1,19 @@
+//кнопка добавления нового партнера
+var addLink = document.createElement('a');
+addLink.className ="nav-link"
+addLink.innerText = "Добавить поставщика";
+addLink.id = "addPartnerButtonId";
+addLink.dataset.target = "#modalPartnerForm";
+addLink.setAttribute("data-toggle", "modal");
 
 
+//елемент li для хранения кнопки
+var newLi = document.createElement('li');
+newLi.className = "nav-item ";
+newLi.appendChild(addLink);
+//добавление елемента в начало списка
+var  topBarUl = document.getElementById("topBarContentUl");
+topBarUl.prepend(newLi);
 
     var request = new XMLHttpRequest();
     
