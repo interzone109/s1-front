@@ -1,2 +1,2 @@
-var title = document.querySelector("h1");
-console.log(title);
+import myDefault from '../js/partner_card_generate';
+myDefault("");
